@@ -1,0 +1,52 @@
+<html>
+<head><title>Shopping Website</title></head>
+<body>
+<form method="POST" action="shopping.php">
+Enter the type of user:
+<select name="user">
+<option value="0">Select user</option>
+<option value="1">Guest</option>
+<option value="2">Customer</option>
+</select>
+<br>
+Do you have a gift card?
+<select name="gift">
+<option value="0">Select</option>
+<option value="1">Yes</option>
+<option value="2">No</option>
+</select>
+<br>
+<input type=submit value="submit form">
+</form>
+</body>
+</html>
+
+--------------------------------------------------------\
+
+
+<?php
+$user=$_POST["user"];
+$gift=$_POST["gift"];
+if(($user=="0")||($gift=="0"))
+echo "Invalid data";
+else
+{
+if($user==1)
+{
+if($gift==1)
+echo "You are eligible for 20% discount";
+else
+echo "You are eligible for 15% discount";
+}
+else
+{
+if($user=="2")
+{
+if($gift=="1")
+echo "You are eligible for 20% discount";
+else
+echo "You are not eligible for discount";
+}
+}
+}
+?>
