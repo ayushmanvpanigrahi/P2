@@ -1,0 +1,262 @@
+Practical 2
+
+Aim: Write a program to implement the operation and can receive requests and
+will return a response in two ways. a) One - Way operation b) Request Response Factorial program
+
+Step 1:-
+Click on the Window menu and click on Projects, Files & Services to open it.
+
+Step 2:-
+Right click on Java DB and then click on Start Server to start the server.
+
+Step 3:-
+Now expand Java DB and right click on sample and then click on connect to
+connect the sample database with the server.
+
+Step 4:-
+Now we are going to create a table in the default database sample.
+Right click on Table -> Create Table
+
+Step 5:-
+Give table names as FRIENDS.
+
+Step 6:-
+Now click on the Add column button to add columns in the table.
+Enter details as in the pic below and select Primary key. After that click on OK
+button.
+
+Step 7:- 
+Now add a second column with the following detail. But don’t select
+primary and click on the OK button.
+
+Step 8:-
+Now click on the OK button.
+
+Step 9:- 
+Now you can see a table with the name FRIENDS in the table.
+
+Step 10:-
+Right click on FRIENDS to view and add records into it.
+
+Step 11:-
+Now click on the leftmost icon in the second panel to insert some record.
+
+Step 12:-
+Insert a record and then click on the Add Row button to insert more records.
+After that click on the OK button to finish.
+
+Step 13:- 
+Now create a web application with the name Server. After that click on Next and then Finish button.
+
+Step 14:-
+Now create a RESTful Web Service from Database by right click on project name.
+
+Step 15:-
+Choose Data Source jdbc/sample.
+
+Step 16:-
+Now select FRIENDS and click on the Add button. After that click on Next button.
+
+Step 17:-
+Enter Package name as com.kk and click on Next button and then Finish.
+
+Step 18:-
+Now open the selected file by double clicking on it.
+
+Step 19:-
+Now remove the selected part from every method in this file. So that it will communicate only in JSON format. You can also use methods to convert it. But This is the easiest method.
+
+Step 20:-
+After that, right click on the project name and Deploy it.
+
+Step 21 :- Now create one more Web Application as a Client. After that click
+on Next and then Finish button.
+
+Step 22:-
+Create a Web Application with the name ServiceClient.
+
+Step 23:-
+Now create a RESTful Java Client.
+Right click on ServiceClient -> New -> Other.
+
+Step 24:-
+Drag down and select Web Services and in side panel select RESTful Java
+Client.
+
+Step 25:-
+After selecting RESTful Java Client click on Next.
+
+Step 26:-
+Enter the following data. Class Name -> Data Package -> com.ss
+
+Step 27:- Now click on Browse button and select the option in the below pic. After select click on OK button.
+
+Step 28:-
+Click on Finish.
+
+Step 29:- Now create a JSP page.
+Right click on ServiceClient -> New -> Other
+
+Step 30:-
+Select Web in Categories section -> Select JSP and click on Next button.
+
+Step 31:-
+Enter File Name Del_data and click on Finish button.
+
+Step 32:-
+Now create one more JSP file by following step number 30, 31 & 32. But File
+Name will be getData.
+
+Step 33:- Now create a Java class.
+Right click on ServiceClient -> New -> Other
+
+Step 34:-
+In Categories select Java and in File Types select Java Class. Click the Next button.
+
+Step 35:-
+Enter Class Name DeleteData and Package com.ss. After that click on Finish.
+
+Step 36:-
+Your project file structure will look like below.
+
+Step 37:- 
+Now open the index.html of ServiceClient project by double click on it and add the following code in between body tags.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+index.html :=
+
+
+<html>
+<head>
+<title> todo supply </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+<body>
+<form>
+<h2>one way operation</h2><br>
+<input type="text" name="ID" placeholder="Enter ID"><br><br>
+<input type="submit" formaction="Del_data.jsp" value="Delete Data" > <br>
+<h1>-----------------------------------------------------</h1>
+<h2>Request-Response operation</h2><br><br>
+<input type="submit" formaction"getData.jsp" value="Get Data">
+</form>
+</body>
+</html>
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Step 38:-
+Now open DeleteData.java file by double click on it and add the following code in the class and save it by pressing Ctrl+S.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+DeleteData.java:
+
+package com.ss;
+
+public class DeleteData{
+public static void deldata(String id){
+String a = id;
+Data ob = new Data();
+ob.remove(a);
+System.out.println("Data is deleted.");
+}}
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Step 39:- 
+Now open the Del_data.jsp file and replace the contents of body with the following code.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Del_data.jsp
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+	<% page import="com.ss.DeleteData"%>
+        <%
+            String d = request.getParameter("ID");
+            DeleteData.deldata(id);
+            %>
+    </body>
+</html>
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Step 40:-
+Now open the getData.jsp file and replace the contents of html tag with the following code and save it.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Del_data.jsp
+
+
+getData.jsp:
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    
+<style>
+table{
+font-family:arial,sans-serif;
+border-collapse:collapse;
+}
+td,th{
+border:1px solid #000000;
+text-align:center;
+padding:0px;
+}
+
+</style>
+
+<script>
+var request = new XMLHttpRequest();
+request.open('GET','http://localhost:8080/Server/webresources/com.kk.friends/',true);
+var data = JSON.parse(this.response);
+for (var i = 0 ;i < data.length;i++){
+var table = document.getElementById("myTable");
+var row = table.insertRow();
+var cell1 = row.insertCell(0);
+var cell2 = row.insertCell(1);
+cell1.innerHTML =data[i].id;
+cell2.innerHTML =data[i].firstname;
+}
+};
+request.send();
+</script>
+</head>
+    <body>
+          <table id="myTable">
+	<tr>
+	   <th> ID</th>
+	   <th> NAME</th>
+       </tr>
+</table>  
+    </body>
+</html>
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Step 41:- 
+Now Run the ServiceClient project.
+
+
+Step 42:-
+On running the project the following window will open in the browser.
